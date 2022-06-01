@@ -15,24 +15,28 @@ function onSearchBox(evt) {
 
      if (!inputValue) {
          document.location.reload()
-    }
+     }
 
     fetchCountries(inputValue)
-        
         .then((item) => {
-            renderMarkup(item);
+            if (item.length === 1)
+                renderMarkupForOne(item)
+            if (item.length >=2 && item.length <=10) {
+            renderMarkupForAll(item)
+        }
+           
             console.log(item);
         })
         .catch(error => {
             console.log('This is error')
                 console.log(error);;
         })
-        
+    
 }
 
 
 
-function renderMarkup(data) {
+function renderMarkupForOne(data) {
     const markup = data
         .map(
             ({ name, capital, population, languages, flags }) => `
@@ -53,3 +57,18 @@ function renderMarkup(data) {
 }
 
 
+function renderMarkupForAll(data) {
+    const markup = data
+        .map(
+            ({ name, flags }) => `
+    <div class="country-info">
+    <img class="country-img"
+     src="${flags.svg}"
+     alt="flags"
+     width = 40px
+     height = 40px >
+    <div class="country-name"> ${name.official}</div>
+    `).join('');
+
+    cardList.innerHTML = markup;
+}
