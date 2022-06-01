@@ -55,8 +55,8 @@ function renderMarkupForOne(data) {
     <img class="country-img"
      src="${flags.svg}"
      alt="flags"
-     width = 40px
-     height = 40px >
+     width = 50px
+     height = 25px >
     <div class="country-name"> ${name.official}</div>
     <div class="country-capital">Capital: ${capital}</div>
     <div class="country-population">Population: ${population}</div>
@@ -76,9 +76,9 @@ function renderMarkupForAll(data) {
     <img class="country-img"
      src="${flags.svg}"
      alt="flags"
-     width = 40px
-     height = 40px >
-    <div class="country-name"> ${name.official}</div>
+     width = 30px
+     height = 15px >
+    <div class="country-name-all"> ${name.official}</div>
     `).join('');
 
     cardList.innerHTML = markup;
