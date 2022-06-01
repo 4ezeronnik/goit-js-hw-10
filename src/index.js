@@ -11,20 +11,31 @@ console.log(cardList);
 inputSearchBox.addEventListener('input', debounce(onSearchBox, DEBOUNCE_DELAY));
 
 function onSearchBox(evt) {
-    const inputValue = evt.target.value;
-   
+    const inputValue = evt.target.value.trim();
+
+     if (!inputValue) {
+         document.location.reload()
+    }
+
     fetchCountries(inputValue)
+        
         .then((item) => {
             renderMarkup(item);
             console.log(item);
         })
+        .catch(error => {
+            console.log('This is error')
+                console.log(error);;
+        })
+        
 }
+
 
 
 function renderMarkup(data) {
     const markup = data
         .map(
-        ({ name, capital, population, languages, flags }) => `
+            ({ name, capital, population, languages, flags }) => `
     <div class="country-info">
     <img class="country-img"
      src="${flags.svg}"
@@ -34,11 +45,11 @@ function renderMarkup(data) {
     <div class="country-name"> ${name.official}</div>
     <div class="country-capital">Capital: ${capital}</div>
     <div class="country-population">Population: ${population}</div>
-     <div class="country-languages">Languages: ${languages}</div>
+     <div class="country-languages">Languages: ${Object.values(languages)}</div>
      </div>
     `).join('');
 
-    cardList.insertAdjacentHTML('beforeend', markup);
+    cardList.innerHTML = markup;
 }
 
 
