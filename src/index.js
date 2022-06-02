@@ -1,13 +1,16 @@
 import './css/styles.css';
+
 import { fetchCountries } from './fetchCountries';
+import { renderMarkupForOne, renderMarkupForAll, cardList } from './renderMarkup';
+
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
+
 
 const DEBOUNCE_DELAY = 300;
 
 const inputSearchBox = document.querySelector('input#search-box');
-const cardList = document.querySelector('.country-list');
-console.log(cardList);
+
 
 inputSearchBox.addEventListener('input', debounce(onSearchBox, DEBOUNCE_DELAY));
 
@@ -15,7 +18,7 @@ function onSearchBox(evt) {
     const inputValue = evt.target.value.trim();
 
      if (!inputValue) {
-         document.reload();
+         document.location.reload();
      }
 
     fetchCountries(inputValue)
@@ -41,45 +44,6 @@ function onSearchBox(evt) {
             console.log(error);
             cardList.innerHTML = "";
             
-        })
-    
+        }) 
 }
 
-
-
-function renderMarkupForOne(data) {
-    const markup = data
-        .map(
-            ({ name, capital, population, languages, flags }) => `
-    <div class="country-info">
-    <img class="country-img"
-     src="${flags.svg}"
-     alt="flags"
-     width = 50px
-     height = 25px >
-    <div class="country-name"> ${name.official}</div>
-    <div class="country-capital">Capital: ${capital}</div>
-    <div class="country-population">Population: ${population}</div>
-     <div class="country-languages">Languages: ${Object.values(languages)}</div>
-     </div>
-    `).join('');
-
-    cardList.innerHTML = markup;
-}
-
-
-function renderMarkupForAll(data) {
-    const markup = data
-        .map(
-            ({ name, flags }) => `
-    <div class="country-info">
-    <img class="country-img"
-     src="${flags.svg}"
-     alt="flags"
-     width = 30px
-     height = 15px >
-    <div class="country-name-all"> ${name.official}</div>
-    `).join('');
-
-    cardList.innerHTML = markup;
-}
