@@ -11,9 +11,9 @@ export function renderMarkupForOne(data) {
      width = 50px
      height = 25px >
     <div class="country-name"> ${name.official}</div>
-    <div class="country-capital">Capital: ${capital}</div>
-    <div class="country-population">Population: ${population}</div>
-     <div class="country-languages">Languages: ${Object.values(languages)}</div>
+    <div class="country-capital"><span class="country-capital__span">Capital:</span> ${capital}</div>
+    <div class="country-population"><span class="country-population__span">Population:</span> ${population}</div>
+     <div class="country-languages"><span class="country-languages__span">Languages:</span> ${Object.values(languages)}</div>
      </div>
     `).join('');
 
@@ -25,7 +25,7 @@ export function renderMarkupForAll(data) {
     const markup = data
         .map(
             ({ name, flags }) => `
-    <div class="country-info">
+    <div class="country-info__all">
     <img class="country-img"
      src="${flags.svg}"
      alt="flags"

@@ -39,3 +39,15 @@ body {
 .country-population {
   margin-bottom: 5px;
 }
+
+.country-capital__span {
+  font-weight: bold;
+}
+
+.country-population__span {
+  font-weight: bold;
+}
+
+.country-languages__span {
+  font-weight: bold;
+}
