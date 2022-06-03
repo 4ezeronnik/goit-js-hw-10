@@ -1,7 +1,7 @@
 import './css/styles.css';
 
-import { fetchCountries } from './fetchCountries';
-import { renderMarkupForOne, renderMarkupForAll, cardList } from './renderMarkup';
+import { fetchCountries } from '../js/fetchCountries';
+import { renderMarkupForOne, renderMarkupForAll, cardList } from '../js/renderMarkup';
 
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
@@ -18,7 +18,7 @@ function onSearchBox(evt) {
     const inputValue = evt.target.value.trim();
 
      if (!inputValue) {
-         document.location.reload();
+         return
      }
 
     fetchCountries(inputValue)
